@@ -1,0 +1,10 @@
+{
+  "category": "Cultural",
+  "title": "New Year",
+  "description": "A Greeting Season",
+  "location": "Your home",
+  "date": "1st Jan",
+  "time": "12.00 pm.",
+  "petAllowed": true,
+  "organizer": "Everyone"
+}

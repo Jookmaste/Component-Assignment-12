@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: 
+      - db
+      - local
+  application:
+    name: 331-backend
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/selabdb
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+application:
+  security:
+    jwt:
+      secret-key: af1bf81505f71dda9ad0c01039f3a21dcb432657ff21f1e90349ead880e282df9f9c2fdb4af30a87923443255eb28da114d3c40819eef557b964221773f9cd65
+      expiration: 86400000 
+      refresh-token:
+        expiration: 604800000
+
+supabase:
+  storage:
+    accessKey: "ed222d5847e7612437c0a64f3fe8e9a9"
+    secretKey: "0523101820543d4efb52488b9406e5b183f631aea937d4e738b51a2f98610b98"
+    endpoint: "https://cflyumukxkeowufifyuu.storage.supabase.co/storage/v1/s3"
+    endpoint_output: "https://cflyumukxkeowufifyuu.storage.supabase.co/storage/v1/s3"
+    region: "ap-southeast-1" # หรือตามที่แล็บกำหนด
+    bucket: "test"
+    url: "https://cflyumukxkeowufifyuu.storage.supabase.co/storage/v1/s3"
