@@ -33,8 +33,7 @@ public class SecurityConfiguration {
               session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             })
 
-            .authorizeHttpRequests((auth) -> auth
-                    .requestMatchers("/events", "/events/**").authenticated()
+            .authorizeHttpRequests((authorize) -> authorize
                     .anyRequest().authenticated()
             )
 
