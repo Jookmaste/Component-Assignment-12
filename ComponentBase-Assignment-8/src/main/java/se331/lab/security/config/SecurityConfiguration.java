@@ -33,10 +33,10 @@ public class SecurityConfiguration {
               session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             })
 
-            .authorizeHttpRequests((auth) -> auth
-                    .requestMatchers("/events", "/events/**").authenticated()
-                    .anyRequest().permitAll()
-            )
+            // .authorizeHttpRequests((auth) -> auth
+            //         .requestMatchers("/events", "/events/**").authenticated()
+            //         .anyRequest().permitAll()
+            // )
 
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .logout((logout) -> {
