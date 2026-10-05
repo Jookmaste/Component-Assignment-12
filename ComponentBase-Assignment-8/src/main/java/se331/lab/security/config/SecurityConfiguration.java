@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 
             .authorizeHttpRequests((auth) -> auth
                     .requestMatchers("/events", "/events/**").authenticated()
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()
             )
 
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
