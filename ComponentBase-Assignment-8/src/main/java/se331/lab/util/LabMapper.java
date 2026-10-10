@@ -3,6 +3,7 @@ package se331.lab.util;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import se331.lab.entity.*;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface LabMapper {
 
     BidDTO getBidDto(Bid bid);
     List<BidDTO> getBidDtoList(List<Bid> bids);
+    
+    @Mapping(target = "roles", source = "user.roles")
+    OrganizerAuthDTO getOrganizerAuthDTO(Organizer organizer);
 }
