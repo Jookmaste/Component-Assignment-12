@@ -7,6 +7,8 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import se331.lab.security.user.User;
+
 @Data
 @Builder
 @Entity
@@ -24,6 +26,9 @@ public class Organizer {
     @OneToMany(mappedBy = "organizer")
     @Builder.Default
     List<Event> ownEvents = new ArrayList<>();
+    
+    @OneToOne
+    User user;  
 
     @ElementCollection
     List<String> images;
