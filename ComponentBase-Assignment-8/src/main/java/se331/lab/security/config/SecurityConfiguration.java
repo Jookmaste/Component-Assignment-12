@@ -3,6 +3,7 @@ package se331.lab.security.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,10 +36,13 @@ public class SecurityConfiguration {
               session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             })
 
-            .authorizeHttpRequests((authorize) -> authorize
-                    .requestMatchers("/api/v1/auth/**").permitAll()
-                    .anyRequest().authenticated()
-            )
+            .authorizeHttpRequests((authorize) -> {
+                authorize.requestMatchers("/api/v1/auth/**").permitAll()
+                  .requestMatchers(HttpMethod.GET, "/events", "/events/**").permitAll()
+                  .requestMatchers(HttpMethod.GET, "/organizers", "/organizers/**").permitAll()
+                  .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                  .anyRequest().authenticated();
+            })
 
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .logout((logout) -> {
