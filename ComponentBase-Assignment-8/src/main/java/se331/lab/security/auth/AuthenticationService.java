@@ -2,15 +2,18 @@ package se331.lab.security.auth;
 
 
 
-import tools.jackson.databind.json.JsonMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import se331.lab.security.config.JwtService;
 import se331.lab.security.token.Token;
 import se331.lab.security.token.TokenRepository;
@@ -18,9 +21,10 @@ import se331.lab.security.token.TokenType;
 import se331.lab.security.user.Role;
 import se331.lab.security.user.User;
 import se331.lab.security.user.UserRepository;
+import se331.lab.util.LabMapper;
+import tools.jackson.databind.json.JsonMapper;
 
-import java.io.IOException;
-import java.util.List;
+import se331.lab.entity.OrganizerDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -66,9 +70,10 @@ public class AuthenticationService {
     String refreshToken = jwtService.generateRefreshToken(user);
 //    revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
-    return AuthenticationResponse.builder()
+        return AuthenticationResponse.builder()
             .accessToken(jwtToken)
             .refreshToken(refreshToken)
+            .user(LabMapper.INSTANCE.getOrganizerDto(user.getOrganizer()))
             .build();
   }
 
